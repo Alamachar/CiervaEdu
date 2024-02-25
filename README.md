@@ -14,13 +14,13 @@ Añadir Repositorios
     apt upgrade -y
     
 
-Instalar Software
+Software general
 -----------------
     apt purge snapd
     apt install -y figlet transmission remmina arduino virtualbox rpi-imager flatpak virt-manager openshot-qt inkscape gimp blender nmap curl libreoffice tree neofetch screen software-properties-common apt-transport-https wget htop bpytop cbonsai net-tools ubuntu-restricted-extras unzip lolcat git whois ssh sshpass gnome-software-plugin-flatpak
     
 
-Instalar Flatpak
+Flatpak
 ----------------
 
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -28,10 +28,10 @@ Instalar Flatpak
     flatpak install -y flathub gitlab.YaLTeR.VideoTrimmer flathub app.drey.Warp flathub com.github.finefindus.eyedropper flathub org.gaphor.Gaphor flathub gitlab.somas.Apostrophe flathub io.gitlab.adhami3310.Converter flathub io.gitlab.adhami3310.Impression com.github.maoschanz.drawing flathub com.mattjakeman.ExtensionManager flathub org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive flathub io.dbeaver.DBeaverCommunity flathub org.chromium.Chromium flathub org.mozilla.firefox
     
 
-Instalar Software dpkg
+Software dpkg
 ----------------------
 
-INSTALAR VMWARE
+Instalar VMware
 
     wget -O /tmp/vmware.bundle https://download3.vmware.com/software/WKST-PLAYER-1750/VMware-Player-Full-17.5.0-22583795.x86_64.bundle
     chmod +x /tmp/vmware.bundle
@@ -39,27 +39,27 @@ INSTALAR VMWARE
     apt update
     apt install -y build-essential gcc make linux-headers-$(uname -r)
     rm /tmp/*
-INSTALAR GOOGLE CHROME
+Instalar Google Chrome
 
     wget -P /tmp https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     dpkg -i /tmp/google-chrome-stable_current_amd64.deb
     rm /tmp/*
-INSTALAR MICROSOFT EDGE
+Instalar Microsoft Edge
 
     wget -P /tmp https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_121.0.2277.113-1_amd64.deb
     dpkg -i /tmp/microsoft-edge-stable_121.0.2277.113-1_amd64.deb
     rm /tmp/*
-INSTALAR ONLYOFFICE
+Instalar ONLYOFFICE
 
     wget -P /tmp https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
     dpkg -i /tmp/onlyoffice-desktopeditors_amd64.deb
     rm /tmp/*
-INSTALAR VISUAL ESTUDIO CODE
+Instalar Visual Studio Code
     
     wget -P /tmp https://vscode.download.prss.microsoft.com/dbazure/download/stable/31c37ee8f63491495ac49e43b8544550fbae4533/code_1.86.1-1707298119_amd64.deb
     dpkg -i /tmp/code_1.86.1-1707298119_amd64.deb
     rm /tmp/*
-INSTALAR CISCO PACKET TRACER
+Instalar Cisco Packet Tracer
 
     wget -P /tmp <enlace de descarga>
     dpkg -i /tmp/CPT.deb
@@ -77,53 +77,63 @@ Establecer Chrome como Navegador Predeterminado
 
 Configurar Fondos
 -----------------
+Crear la carpeta ``/usr/share/backgrounds/ciervaedu``
 
-    mkdir /usr/share/backgrounds/ciervaedu
+Mover los archivos [Wallpapers](Wallpapers) a la carpeta
 
-    
+Para que los fondos se muestren desde la aplicacion de configuracion crear ``/usr/share/gnome-background-properties/ciervaedu-wallpapers.xml``
+
+Contenido de [ciervaedu-wallpapers.xml](ciervaedu-wallpapers.xml)
 
 Configurar Entorno Gráfico
 --------------------------
+Crear la carpeta para almecenar la configuracion
 
     mkdir /etc/dconf/db/ciervaedu.d
     touch /etc/dconf/db/ciervaedu.d/ciervaedu-settings
+Contenido de [ciervaedu-settings](ciervaedu-settings)
 
-Configurar bashrc
------------------
+    echo "user-db:user 
+    system-db:ciervaedu" /etc/dconf/profile/user
+    dconf update
 
-    # Añadir "figlet CiervaEdu | lolcat" en /etc/skel/.bashrc
-    
+Configuracion del usuario
+------------------------------------
+Añadir en **/etc/skel/.bashrc**  ``figlet CiervaEdu | lolcat``
 
-Descargar Extensiones
+Crear la carpeta **.config/neofetch** y añadir [config.conf](config/neofetch/config.conf)
+
+Extensiones
 ---------------------
 
-    # Descargar y configurar varias extensiones de GNOME Shell
-    
+Ir a la carpeta /usr/share/gnome-shell/extensions/ una vez ahi añadir las [Extensiones](Extensiones) descomprimidas y dar permisos 755 de manera recursiva ``chmod -R 755``
+
 
 Configurar Imagen Splash
 ------------------------
+Sustituir por las imagenes que se encuentran el el repositorio
 
-    rm /usr/share/plymouth/ubuntu-logo.png
-    wget -P /usr/share/plymouth/ https://ciervaedu.duckdns.org/resources/plymouth/ubuntu-logo.png
-    
+    /usr/share/plymouth/ubuntu-logo.png
 
-Info Release
-------------
+[ubuntu-logo.png](ubuntu-logo.png)
 
-    # Mostrar información de release
-    
+    /usr/share/plymouth/themes/spinner watermark.png bgrt-fallback.png   
+
+[bgrt-fallback.png](bgrt-fallback.png)
+
+[watermark.png](watermark.png)
+
 
 Slider del Instalador
 ---------------------
-
-    # Mover la carpeta ubiquity a /usr/share/ubiquity-slideshow/sliides
-    
+Eliminar el contenido de ``/usr/share/ubiquity-slideshow/slides``  
 
 Comandos Personalizados
 -----------------------
+[/usr/bin](bin) [/usr/sbin](sbin)
 
-    # Mover archivos a /usr/bin y /usr/sbin para los de administración
-    # Dar permisos 755
-    
+Mover archivos a ``/usr/bin`` y ``/usr/sbin``. Dar permisos 755 a los archivos
 
-¡Felicidades! Has completado la instalación de CiervaEdu. Ahora puedes disfrutar de tu nuevo sistema operativo.
+Crear el grupo para la restriccion de aplicaciones ``addgroup appusers``
+
+**¡Felicidades!🎉** Has completado la instalación de CiervaEdu. Ahora puedes disfrutar de tu nuevo sistema operativo. 

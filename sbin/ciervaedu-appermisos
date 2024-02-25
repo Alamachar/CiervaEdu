@@ -1,8 +1,8 @@
 #!/bin/bash
 #ciervaedu-appermisos
-# Función para mostrar el uso correcto del script
+# Funcion para mostrar el uso correcto del script
 mostrar_uso() {
-    echo "Uso: sudo $0 <opción>"
+    echo "Uso: sudo $0 <opcion>"
     echo "Opciones:"
     echo "  1. Cambiar grupo y permisos del comando"
     echo "  2. Agregar usuario al grupo"
@@ -16,15 +16,15 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-# Verificamos que se haya proporcionado una opción
+# Verificamos que se haya proporcionado una opcion
 if [ $# -ne 1 ]; then
     mostrar_uso
 fi
 
-# Asignamos la opción proporcionada a una variable
+# Asignamos la opcion proporcionada a una variable
 opcion=$1
 
-# Comprobamos la opción seleccionada y realizamos la acción correspondiente
+# Comprobamos la opcion seleccionada y realizamos la acción correspondiente
 case $opcion in
     1)
 	echo "Con el comando which puedes ver la ruta del comando"
