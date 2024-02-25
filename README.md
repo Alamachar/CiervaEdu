@@ -1,7 +1,14 @@
-Manual de Instalación de CiervaEdu
-======================================
 
-Este manual te guiará a través del proceso de instalación del sistema operativo CiervaEdu. Sigue los pasos detallados a continuación para completar la instalación correctamente.
+# Repositorio oficial
+![alt text](CiervaEduLogo.png)
+Visita la pagina en [CiervaEdu Web](https://ciervaedu.duckdns.org)
+# Manual de Instalación de CiervaEdu
+
+Este manual te guiará a través del proceso de configuracion de CiervaEdu. Sigue los pasos detallados a continuación para completar la instalación correctamente.
+
+Para poder seguir este manual es necerario disponer de un sistema linux que permita usar el software [Cubic](https://github.com/PJ-Singh-001/Cubic)
+
+Para añadir archivos locales presionar el icono ![copyfile.png](copyfile.png)
 
 Añadir Repositorios
 -------------------
@@ -64,6 +71,8 @@ Instalar Cisco Packet Tracer
     wget -P /tmp <enlace de descarga>
     dpkg -i /tmp/CPT.deb
     apt install -f -y
+    apt update
+    apt upgrade -y
     rm /tmp/*
 
     
@@ -136,4 +145,4 @@ Mover archivos a ``/usr/bin`` y ``/usr/sbin``. Dar permisos 755 a los archivos
 
 Crear el grupo para la restriccion de aplicaciones ``addgroup appusers``
 
-**¡Felicidades!🎉** Has completado la instalación de CiervaEdu. Ahora puedes disfrutar de tu nuevo sistema operativo. 
+**¡Felicidades!🎉** Has completado la instalación de CiervaEdu. Ahora puedes disfrutar de tu nuevo sistema operativo.
