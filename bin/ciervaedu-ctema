@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+#ciervaedu-ctema
+echo "Cambiando tema"
+if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'prefer-light'"; then
+  gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue-dark'
+  gsettings set org.gnome.desktop.interface icon-theme 'Yaru-blue-dark'
+else
+  gsettings set org.gnome.desktop.interface color-scheme prefer-light
+  gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-blue'
+  gsettings set org.gnome.desktop.interface icon-theme 'Yaru-blue'
+fi

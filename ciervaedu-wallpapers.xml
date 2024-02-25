@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Poner en /usr/share/gnome-background-properties-->
+<wallpapers>
+    <wallpaper>
+        <name>CiervaEdu Oscuro</name>
+        <filename>/usr/share/backgrounds/ciervaedu/ciervaedu_dark_wallpaper.png</filename>
+        <options>zoom</options>
+    </wallpaper>
+    <wallpaper>
+        <name>CiervaEu Claro</name>
+        <filename>/usr/share/backgrounds/ciervaedu/ciervaedu_white_wallpaper.png</filename>
+        <options>zoom</options>
+      </wallpaper>
+</wallpapers>

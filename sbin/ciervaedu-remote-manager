@@ -1,0 +1,92 @@
+#!/bin/bash
+#ciervaedu-remote-manager
+# Verificar si el usuario es root
+if [ "$(id -u)" != "0" ]; then
+    echo "Este script debe ser ejecutado como root" 1>&2
+    exit 1
+fi
+# Funcion para actualizar los paquetes en el sistema remoto
+update_packages() {
+    sshpass -p "$ssh_pass" ssh -o StrictHostKeyChecking=no "$user@$1" "echo '$sudo_pass' | sudo -S apt update && echo '$sudo_pass' | sudo -S apt upgrade -y"
+}
+
+# Funcion para instalar un paquete en el sistema remoto
+install_package() {
+    sshpass -p "$ssh_pass" ssh -o StrictHostKeyChecking=no "$user@$1" "echo '$sudo_pass' | sudo -S apt install -y $2"
+}
+
+# Funcion para desinstalar un paquete en el sistema remoto
+uninstall_package() {
+    sshpass -p "$ssh_pass" ssh -o StrictHostKeyChecking=no "$user@$1" "echo '$sudo_pass' | sudo -S apt remove -y $2"
+}
+
+# Verificar si se proporciona el archivo de direcciones IP como argumento
+if [ $# -eq 0 ]; then
+    echo "Uso: $0 archivo_de_direcciones_IP"
+    exit 1
+fi
+
+# Verificar si sshpass esta instalado
+if ! command -v sshpass &> /dev/null; then
+    echo "sshpass no esta instalado. Por favor, instalalo antes de ejecutar este script."
+    exit 1
+fi
+
+# Solicitar credenciales SSH y sudo
+read -p "Usuario SSH: " user
+read -sp "Contrasena SSH: " ssh_pass
+echo
+read -sp "Contrasena sudo: " sudo_pass
+echo
+
+# Preguntar al usuario si desea instalar, desinstalar, actualizar o no hacer nada
+read -p "¿Desea instalar (i), desinstalar (d), actualizar (a) o no hacer nada (n) en los equipos remotos? : " choice
+case "$choice" in
+    i)
+        read -p "Nombre del paquete a instalar: " package
+        ;;
+    d)
+        read -p "Nombre del paquete a desinstalar: " package
+        ;;
+    a)
+        ;;
+    n)
+        echo "No se realizaran instalaciones, desinstalaciones ni actualizaciones en los equipos remotos."
+        exit 0
+        ;;
+    *)
+        echo "Opcion no valida. No se realizaran instalaciones, desinstalaciones ni actualizaciones en los equipos remotos."
+        exit 1
+        ;;
+esac
+
+# Leer las direcciones IP del archivo proporcionado
+while IFS= read -r line; do
+    # Iterar sobre cada direccion IP en la linea
+    for ip_address in $line; do
+        echo "Conectando a $ip_address..."
+        
+        case "$choice" in
+            i)
+                install_package "$ip_address" "$package"
+                echo "Instalacion completada en $ip_address"
+                ;;
+            d)
+                uninstall_package "$ip_address" "$package"
+                echo "Desinstalacion completada en $ip_address"
+                ;;
+            a)
+                update_packages "$ip_address"
+                echo "Actualizacion completada en $ip_address"
+                ;;
+            n)
+                echo "No se realizaran instalaciones, desinstalaciones ni actualizaciones en $ip_address"
+                ;;
+        esac
+        
+        echo
+    done
+done < "$1"
+
+echo "Todas las acciones solicitadas han sido completadas en los equipos remotos."
+

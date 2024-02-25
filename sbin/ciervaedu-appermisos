@@ -1,0 +1,69 @@
+#!/bin/bash
+#ciervaedu-appermisos
+# Función para mostrar el uso correcto del script
+mostrar_uso() {
+    echo "Uso: sudo $0 <opción>"
+    echo "Opciones:"
+    echo "  1. Cambiar grupo y permisos del comando"
+    echo "  2. Agregar usuario al grupo"
+    echo "  3. Quitar usuario del grupo"
+    exit 1
+}
+
+# Verificamos que el script se ejecute como root
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Este script debe ejecutarse como root."
+    exit 1
+fi
+
+# Verificamos que se haya proporcionado una opción
+if [ $# -ne 1 ]; then
+    mostrar_uso
+fi
+
+# Asignamos la opción proporcionada a una variable
+opcion=$1
+
+# Comprobamos la opción seleccionada y realizamos la acción correspondiente
+case $opcion in
+    1)
+	echo "Con el comando which puedes ver la ruta del comando"
+        echo "Ingrese la ruta del comando y el nombre del usuario:"
+        read -p "Nombre del comando: " comando
+        read -p "Nombre del usuario: " usuario
+        grupo="appusers"
+        
+        # Cambiamos los permisos del comando a 750 y lo asignamos al grupo "appusers"
+        chmod 750 "$comando"
+        chgrp "$grupo" "$comando"
+        
+        # Añadimos al usuario al grupo "appusers"
+        usermod -aG "$grupo" "$usuario"
+        echo "El usuario $usuario fue añadido al grupo $grupo."
+        
+        echo "Se han cambiado los permisos del comando $comando a 750 y se ha asignado al grupo $grupo."
+        ;;
+    2)
+        echo "Ingrese el nombre del usuario que desea agregar al grupo appusers:"
+        read -p "Nombre del usuario: " usuario
+        grupo="appusers"
+        
+        # Añadimos al usuario al grupo "appusers"
+        usermod -aG "$grupo" "$usuario"
+        echo "El usuario $usuario fue añadido al grupo $grupo."
+        ;;
+    3)
+        echo "Ingrese el nombre del usuario que desea quitar del grupo appusers:"
+        read -p "Nombre del usuario: " usuario
+        grupo="appusers"
+        
+        # Quitamos al usuario del grupo "appusers"
+        gpasswd -d "$usuario" "$grupo"
+        echo "El usuario $usuario fue quitado del grupo $grupo."
+        ;;
+    *)
+        mostrar_uso
+        ;;
+esac
+
+exit 0
