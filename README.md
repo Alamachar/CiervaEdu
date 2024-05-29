@@ -1,7 +1,8 @@
 
 # Repositorio oficial
 ![alt text](CiervaEduLogo.png)
-Visita la pagina en [CiervaEdu Web](https://ciervaedu.duckdns.org)
+
+Visita la pagina en [CiervaEdu Web](https://ciervaedu.pablomp.es)
 # Manual de Instalación de CiervaEdu
 
 Este manual te guiará a través del proceso de configuracion de CiervaEdu. Sigue los pasos detallados a continuación para completar la instalación correctamente.
