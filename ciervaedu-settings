@@ -1,36 +1,27 @@
 [org/gnome/desktop/background]
-// Cambiar fondo predetermiando
 picture-uri='file:////usr/share/backgrounds/ciervaedu/ciervaedu_white_wallpaper.png'
 picture-uri-dark='file:////usr/share/backgrounds/ciervaedu/ciervaedu_dark_wallpaper.png'
 
 [org/gnome/desktop/interface]
-// Mostar dia de la semana junto la hora
 clock-show-weekday=true
-// Establecer tema claro
 color-scheme='prefer-light'
-// Cambiar tema de iconos predeterminado
 gtk-theme='Yaru-blue'
 icon-theme='Yaru-blue'
 
 [org/gnome/desktop/notifications]
-// Ocultar notificaciones en la pantalla de bloqueo
 show-in-lock-screen=false
 
 [org/gnome/desktop/session]
-// Desactivar auto apagado de pantalla
 idle-delay=uint32 0
 
 [org/gnome/mutter]
-// Centrar ventanas al abrirse
 center-new-windows=true
 
 [org/gnome/settings-daemon/plugins/color]
-// Activar luz nocturna
 night-light-enabled=true
 night-light-temperature=uint32 2700
 
 [org/gnome/desktop/app-folders]
-// Carpetas
 folder-children=['Utilities', 'YaST', '854c5066-1bfc-418b-a0af-8128c5091e40', '2af7aab9-6c14-4bba-a659-f5dc135cfb34', '55c26189-af53-4e98-a2f6-f532fd774e4e', '7cef237c-8e89-4d72-80f8-3ab75df0acc6', '14bd3a84-f892-46f4-9093-c7675459f111']
 
 [org/gnome/desktop/app-folders/folders/14bd3a84-f892-46f4-9093-c7675459f111]
@@ -62,29 +53,22 @@ name='X-GNOME-Utilities.directory'
 translate=true
 
 [org/gnome/shell]
-// Extensiones predetarminadas activadas
 enabled-extensions=['drive-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'clipboard-indicator@tudmotu.com', 'blur-my-shell@aunetx', 'ding@rastersoft.com']
-// Aplicaciones ancladas a la barra de tareas
 favorite-apps=['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'vmware-player.desktop', 'virtualbox.desktop', 'libreoffice-writer.desktop']
 
 [org/gnome/shell/extensions/dash-to-dock]
-// En caso de que no se quiera la barra estilo windows desactivar dash-to-panel@jderose9.github.com 
-// Posicion predeterminada del dock abajo
 dock-position='BOTTOM'
 
 [org/gnome/shell/extensions/ding]
-// Ocultar carpeta de usuario del escritorio
 show-home=false
 
 [org/gnome/terminal/legacy/profiles:/:7a248481-63d3-4dc9-9c02-0124d24ae55f]
-// Perfil alternativo
 background-color='rgb(255,255,255)'
 foreground-color='rgb(23,20,33)'
 use-theme-colors=false
 visible-name='Tema claro'
 
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
-// Perfil predetarminado del terminal
 background-color='rgb(23,20,33)'
 foreground-color='rgb(208,207,204)'
 use-theme-colors=false

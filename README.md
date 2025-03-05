@@ -7,24 +7,26 @@ Visita la pagina en [CiervaEdu Web](https://ciervaedu.pablomp.es)
 
 Este manual te guiará a través del proceso de configuracion de CiervaEdu. Sigue los pasos detallados a continuación para completar la instalación correctamente.
 
-Para poder seguir este manual es necerario disponer de un sistema linux que permita usar el software [Cubic](https://github.com/PJ-Singh-001/Cubic)
+Se recomienda realizar las acciones como usuario root
 
-Para añadir archivos locales presionar el icono ![copyfile.png](copyfile.png)
-
-Añadir Repositorios
+Actualicacion inicial
 -------------------
 
-    add-apt-repository --yes main
-    add-apt-repository --yes restricted
-    add-apt-repository --yes universe
-    add-apt-repository --yes multiverse
     apt update
     apt upgrade -y
     
 
+Desinstalar snap
+-----------------
+
+Quitar todos los paquetes snap
+
+    snap remove --purge paquete-snap
+    apt purge snapd
+
 Software general
 -----------------
-    apt purge snapd
+
     apt install -y figlet transmission remmina arduino virtualbox rpi-imager flatpak virt-manager openshot-qt inkscape gimp blender nmap curl libreoffice tree neofetch screen software-properties-common apt-transport-https wget htop bpytop cbonsai net-tools ubuntu-restricted-extras unzip lolcat git whois ssh sshpass gnome-software-plugin-flatpak
     
 
@@ -36,45 +38,51 @@ Flatpak
     flatpak install -y flathub gitlab.YaLTeR.VideoTrimmer flathub app.drey.Warp flathub com.github.finefindus.eyedropper flathub org.gaphor.Gaphor flathub gitlab.somas.Apostrophe flathub io.gitlab.adhami3310.Converter flathub io.gitlab.adhami3310.Impression com.github.maoschanz.drawing flathub com.mattjakeman.ExtensionManager flathub org.gnome.gitlab.somas.Apostrophe.Plugin.TexLive flathub io.dbeaver.DBeaverCommunity flathub org.chromium.Chromium flathub org.mozilla.firefox
     
 
-Software dpkg
-----------------------
+# Software dpkg
 
-Instalar VMware
+## Instalar VMware
 
-    wget -O /tmp/vmware.bundle https://download3.vmware.com/software/WKST-PLAYER-1750/VMware-Player-Full-17.5.0-22583795.x86_64.bundle
-    chmod +x /tmp/vmware.bundle
-    sh /tmp/vmware.bundle
+Descargar e instalar manualmente el paquete de Vmware
+
+    
+    #Instalar dependencias
     apt update
     apt install -y build-essential gcc make linux-headers-$(uname -r)
-    rm /tmp/*
-Instalar Google Chrome
-
-    wget -P /tmp https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-    rm /tmp/*
-Instalar Microsoft Edge
-
-    wget -P /tmp https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_121.0.2277.113-1_amd64.deb
-    dpkg -i /tmp/microsoft-edge-stable_121.0.2277.113-1_amd64.deb
-    rm /tmp/*
-Instalar ONLYOFFICE
-
-    wget -P /tmp https://download.onlyoffice.com/install/desktop/editors/linux/onlyoffice-desktopeditors_amd64.deb
-    dpkg -i /tmp/onlyoffice-desktopeditors_amd64.deb
-    rm /tmp/*
-Instalar Visual Studio Code
     
-    wget -P /tmp https://vscode.download.prss.microsoft.com/dbazure/download/stable/31c37ee8f63491495ac49e43b8544550fbae4533/code_1.86.1-1707298119_amd64.deb
-    dpkg -i /tmp/code_1.86.1-1707298119_amd64.deb
-    rm /tmp/*
-Instalar Cisco Packet Tracer
+## Instalar Google Chrome
 
-    wget -P /tmp <enlace de descarga>
-    dpkg -i /tmp/CPT.deb
+Descargar desde la pagina oficial
+
+
+    dpkg -i paquete.deb
+
+## Instalar Microsoft Edge
+
+Descargar desde la pagina oficial
+
+
+    dpkg -i paquete.deb
+    
+## Instalar ONLYOFFICE
+
+Descargar desde la pagina oficial
+
+    dpkg -i paquete.deb
+
+## Instalar Visual Studio Code
+    
+Descargar desde la pagina oficial
+
+    dpkg -i paquete.deb
+
+## Instalar Cisco Packet Tracer
+
+Descargar desde la pagina oficial
+
+    dpkg -i paquete.deb
     apt install -f -y
     apt update
     apt upgrade -y
-    rm /tmp/*
 
     
 
@@ -101,10 +109,11 @@ Crear la carpeta para almecenar la configuracion
 
     mkdir /etc/dconf/db/ciervaedu.d
     touch /etc/dconf/db/ciervaedu.d/ciervaedu-settings
+    touch /etc/dconf/profile/user
 Contenido de [ciervaedu-settings](ciervaedu-settings)
 
-    echo "user-db:user 
-    system-db:ciervaedu" /etc/dconf/profile/user
+Contenido de [dconf-profile](dconf-profile)
+
     dconf update
 
 Configuracion del usuario
