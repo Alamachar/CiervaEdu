@@ -1,0 +1,26 @@
+# SWITCHABLE PROFILE CONFIG
+if [ -f ~/.bashrc_profile ]; then
+    CURRENT_PROFILE=$(cat ~/.bashrc_profile)
+else
+    CURRENT_PROFILE="simple"
+fi
+
+case $CURRENT_PROFILE in
+    "visual") source ~/.bashrc_visual ;;
+    "simple") source ~/.bashrc_simple ;;
+    "starship") source ~/.bashrc_starship ;;
+    *) echo "Perfil desconocido: $CURRENT_PROFILE" ;;
+esac
+
+change_profile() {
+    if [[ "$1" == "visual" || "$1" == "simple" || "$1" == "starship" ]]; then
+        echo "$1" > ~/.bashrc_profile
+        echo "Perfil cambiado a: $1"
+        echo "Ejecuta 'source ~/.bashrc' para aplicar los cambios"
+    else
+        echo "Perfiles disponibles:"
+        echo "  visual - Configuración con herramientas gráficas"
+        echo "  simple - Configuración minimalista básica"
+        echo "  starship - https://starship.rs"
+    fi
+}

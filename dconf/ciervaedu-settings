@@ -1,0 +1,214 @@
+[org/gnome/TextEditor]
+highlight-current-line=true
+show-line-numbers=true
+show-map=true
+spellcheck=false
+
+[org/gnome/desktop/app-folders]
+folder-children=['Utilidades', 'YaST', 'Pardus', '5b4f123e-3241-4bf8-9ac3-6ca83da3cb50', '9dfcc00c-340d-4e6d-97e9-cff38ad3d09b', '3e973a80-3d14-4bb6-82b9-bdd1f92a4385', '6317d5ef-c1c4-40c9-a20b-dc68c629af44', '47f28537-644e-4434-8df5-e16e7ab02ec5', 'd35769c0-4e42-46da-823c-7fe992c832c5']
+
+[org/gnome/desktop/app-folders/folders/3e973a80-3d14-4bb6-82b9-bdd1f92a4385]
+apps=['libreoffice-startcenter.desktop', 'libreoffice-base.desktop', 'libreoffice-calc.desktop', 'libreoffice-draw.desktop', 'libreoffice-impress.desktop', 'libreoffice-math.desktop', 'libreoffice-writer.desktop', 'org.gnome.TextEditor.desktop']
+name='Oficina'
+
+[org/gnome/desktop/app-folders/folders/47f28537-644e-4434-8df5-e16e7ab02ec5]
+apps=['blender.desktop', 'gimp.desktop', 'org.inkscape.Inkscape.desktop', 'org.openshot.OpenShot.desktop', 'com.github.PintaProject.Pinta.desktop']
+name='Gráficos'
+
+[org/gnome/desktop/app-folders/folders/5b4f123e-3241-4bf8-9ac3-6ca83da3cb50]
+apps=['com.github.unrud.VideoDownloader.desktop', 'app.drey.Dialect.desktop', 'com.github.finefindus.eyedropper.desktop', 'io.github.ronniedroid.concessio.desktop', 'org.gaphor.Gaphor.desktop', 'io.github.nokse22.Exhibit.desktop', 'fr.romainvigier.MetadataCleaner.desktop', 'io.gitlab.adhami3310.Impression.desktop', 'org.raspberrypi.rpi-imager.desktop', 'org.gnome.gitlab.YaLTeR.VideoTrimmer.desktop', 'org.gnome.Meld.desktop']
+name='Herramientas'
+translate=false
+
+[org/gnome/desktop/app-folders/folders/6317d5ef-c1c4-40c9-a20b-dc68c629af44]
+apps=['microsoft-edge.desktop', 'google-chrome.desktop', 'filezilla.desktop', 'org.qbittorrent.qBittorrent.desktop']
+name='Internet'
+
+[org/gnome/desktop/app-folders/folders/9dfcc00c-340d-4e6d-97e9-cff38ad3d09b]
+apps=['update-manager.desktop', 'gnome-session-properties.desktop', 'org.gnome.Settings.desktop', 'yelp.desktop', 'org.gnome.PowerStats.desktop', 'virt-manager.desktop', 'htop.desktop', 'display-im6.q16.desktop', 'org.gnome.SystemMonitor.desktop', 'ranger.desktop', 'software-properties-drivers.desktop', 'nm-connection-editor.desktop', 'org.gnome.Logs.desktop', 'software-properties-gtk.desktop', 'vmware-workstation.desktop', 'vmware-netcfg.desktop', 'gnome-language-selector.desktop', 'info.desktop', 'org.gnome.eog.desktop', 'vim.desktop']
+name='Preferences'
+
+[org/gnome/desktop/app-folders/folders/Pardus]
+categories=['X-Pardus-Apps']
+name='X-Pardus-Apps.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/d35769c0-4e42-46da-823c-7fe992c832c5]
+apps=['org.gnome.Characters.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.DiskUtility.desktop', 'org.flameshot.Flameshot.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Evince.desktop', 'org.gnome.baobab.desktop', 'remote-viewer.desktop']
+name='Accesorios'
+
+[org/gnome/desktop/background]
+picture-uri='file:////usr/share/backgrounds/ciervaedu/ciervaedu_white_wallpaper.png'
+picture-uri-dark='file:////usr/share/backgrounds/ciervaedu/ciervaedu_dark_wallpaper.png'
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'es')]
+xkb-options=@as []
+
+[org/gnome/desktop/interface]
+clock-show-weekday=true
+gtk-theme='Yaru-blue'
+icon-theme='Yaru-blue'
+
+[org/gnome/desktop/notifications]
+application-children=['org-gnome-nautilus', 'org-gnome-shell-extensions']
+show-in-lock-screen=false
+
+[org/gnome/desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-shell-extensions]
+application-id='org.gnome.Shell.Extensions.desktop'
+
+[org/gnome/desktop/peripherals/touchpad]
+two-finger-scrolling-enabled=true
+
+[org/gnome/desktop/search-providers]
+disabled=['org.gnome.Settings.desktop']
+sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
+
+[org/gnome/desktop/session]
+idle-delay=uint32 0
+
+[org/gnome/mutter]
+center-new-windows=true
+edge-tiling=false
+
+[org/gnome/mutter/keybindings]
+toggle-tiled-left=@as []
+toggle-tiled-right=@as []
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
+migrated-gtk-settings=true
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size=(890, 550)
+
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=true
+night-light-temperature=uint32 2700
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='Print'
+command='flameshot gui'
+name='Flameshot'
+
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-timeout=3600
+sleep-inactive-ac-type='nothing'
+
+[org/gnome/shell]
+app-picker-layout=[{'9dfcc00c-340d-4e6d-97e9-cff38ad3d09b': <{'position': <0>}>, 'd35769c0-4e42-46da-823c-7fe992c832c5': <{'position': <1>}>, 'arduino.desktop': <{'position': <2>}>, 'org.gnome.clocks.desktop': <{'position': <3>}>, '47f28537-644e-4434-8df5-e16e7ab02ec5': <{'position': <4>}>, 'app.drey.Blurble.desktop': <{'position': <5>}>, 'io.dbeaver.DBeaverCommunity.desktop': <{'position': <6>}>, 'org.gnome.Calculator.desktop': <{'position': <7>}>, '5b4f123e-3241-4bf8-9ac3-6ca83da3cb50': <{'position': <8>}>, '3e973a80-3d14-4bb6-82b9-bdd1f92a4385': <{'position': <9>}>, 'io.missioncenter.MissionCenter.desktop': <{'position': <10>}>, '6317d5ef-c1c4-40c9-a20b-dc68c629af44': <{'position': <11>}>, 're.sonny.Playhouse.desktop': <{'position': <12>}>, 'cisco-pt821.desktop': <{'position': <13>}>, 'org.remmina.Remmina.desktop': <{'position': <14>}>, 'app.drey.Warp.desktop': <{'position': <15>}>, 'wallpaperapp.desktop': <{'position': <16>}>, 'com.mattjakeman.ExtensionManager.desktop': <{'position': <17>}>}]
+enabled-extensions=['blur-my-shell@aunetx', 'clipboard-indicator@tudmotu.com', 'Vitals@CoreCoding.com', 'ubuntu-appindicators@ubuntu.com', 'notification-banner-reloaded@marcinjakubowski.github.com', 'ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']
+favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'vmware-player.desktop', 'virtualbox.desktop', 'code.desktop', 'libreoffice-startcenter.desktop', 'org.gnome.TextEditor.desktop']
+welcome-dialog-last-shown-version='46.0'
+
+[org/gnome/shell/extensions/blur-my-shell]
+settings-version=2
+
+[org/gnome/shell/extensions/blur-my-shell/appfolder]
+brightness=0.59999999999999998
+sigma=30
+
+[org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/dash-to-dock]
+blur=false
+brightness=0.59999999999999998
+pipeline='pipeline_default_rounded'
+sigma=30
+static-blur=true
+style-dash-to-dock=0
+
+[org/gnome/shell/extensions/blur-my-shell/lockscreen]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/overview]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/panel]
+blur=false
+brightness=0.59999999999999998
+pipeline='pipeline_default'
+sigma=30
+
+[org/gnome/shell/extensions/blur-my-shell/screenshot]
+pipeline='pipeline_default'
+
+[org/gnome/shell/extensions/blur-my-shell/window-list]
+brightness=0.59999999999999998
+sigma=30
+
+[org/gnome/shell/extensions/clipboard-indicator]
+confirm-clear=false
+enable-keybindings=false
+history-size=20
+notify-on-cycle=false
+
+[org/gnome/shell/extensions/dash-to-dock]
+always-center-icons=false
+apply-custom-theme=false
+background-opacity=1.0
+dash-max-icon-size=48
+disable-overview-on-startup=true
+dock-position='BOTTOM'
+height-fraction=0.90000000000000002
+multi-monitor=true
+preferred-monitor=-2
+preferred-monitor-by-connector='Virtual1'
+preview-size-scale=0.0
+running-indicator-style='DOTS'
+transparency-mode='DYNAMIC'
+
+[org/gnome/shell/extensions/ding]
+check-x11wayland=true
+show-home=false
+show-network-volumes=false
+show-trash=false
+
+[org/gnome/shell/extensions/notification-banner-reloaded]
+anchor-horizontal=1
+anchor-vertical=0
+animation-direction=3
+
+[org/gnome/shell/extensions/tiling-assistant]
+active-window-hint-color='rgb(0,115,229)'
+last-version-installed=46
+overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-left': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-right': <@mb nothing>}
+
+[org/gnome/shell/extensions/vitals]
+hot-sensors=['_processor_usage_', '_memory_usage_', '__network-rx_max__']
+icon-style=1
+position-in-panel=0
+show-fan=false
+show-storage=false
+show-system=false
+show-voltage=false
+
+[org/gnome/shell/keybindings]
+show-screenshot-ui=@as []
+
+[org/gnome/shell/world-clocks]
+locations=@av []
+
+[org/gnome/terminal/legacy/profiles:/:7a248481-63d3-4dc9-9c02-0124d24ae55f]
+background-color='rgb(255,255,255)'
+foreground-color='rgb(23,20,33)'
+use-theme-colors=false
+visible-name='Tema claro'
+
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(23,20,33)'
+foreground-color='rgb(208,207,204)'
+use-theme-colors=false
+visible-name='Tema oscuro'
+
+[org/gtk/gtk4/settings/file-chooser]
+show-hidden=false
+sort-directories-first=true

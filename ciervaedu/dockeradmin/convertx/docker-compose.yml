@@ -1,0 +1,15 @@
+services:
+  convertx: 
+    image: ghcr.io/c4illin/convertx
+    container_name: convertx
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - HIDE_HISTORY=true
+      - ALLOW_UNAUTHENTICATED=true
+      - HTTP_ALLOWED=true 
+      - ACCOUNT_REGISTRATION=false
+      - AUTO_DELETE_EVERY_N_HOURS=1
+    volumes:
+      - ./data:/app/data

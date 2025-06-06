@@ -3,28 +3,21 @@
 show_options() {
     echo "Opciones disponibles:"
     echo "1. Firefox"
-    echo "2. Chromium"
-    echo "3. Google Chrome"
-    echo "4. Microsoft Edge"
+    echo "2. Google Chrome"
+    echo "3. Microsoft Edge"
 }
 
 set_default_browser() {
     case $1 in
         1)
-            flatpak override --user --env=MOZ_DBUS_REMOTE=1 org.mozilla.firefox
-            xdg-settings set default-web-browser org.mozilla.firefox.desktop
+            xdg-settings set default-web-browser firefox.desktop
             echo "Navegador predeterminado establecido a Firefox."
             ;;
         2)
-            flatpak override --user --env=CHROMIUM_FLAGS=--no-sandbox org.chromium.Chromium
-            xdg-settings set default-web-browser org.chromium.Chromium.desktop
-            echo "Navegador predeterminado establecido a Chromium."
-            ;;
-        3)
             xdg-settings set default-web-browser google-chrome.desktop
             echo "Navegador predeterminado establecido a Google Chrome."
             ;;
-        4)
+        3)
             xdg-settings set default-web-browser microsoft-edge.desktop
             echo "Navegador predeterminado establecido a Microsoft Edge."
             ;;
@@ -36,7 +29,7 @@ set_default_browser() {
 
 show_options
 
-read -p "Selecciona el navegador que deseas establecer como predeterminado (1-4): " choice
+read -p "Selecciona el navegador que deseas establecer como predeterminado (1-3): " choice
 
 set_default_browser $choice
 

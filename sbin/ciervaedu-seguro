@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Script para proteger/desproteger archivos críticos con sistema de logging
+# Uso: sudo ./script [proteger|desproteger|estado]
+
+archivos=("/etc/shadow" "/etc/passwd" "/etc/group" "/etc/sudoers")
+
+# Función de logging con colores
+log_message() {
+    local level=$1
+    local message=$2
+    local color
+    
+    case $level in
+        ERROR)
+            color='\033[0;31m' # Rojo
+            ;;
+        WARN)
+            color='\033[1;33m' # Amarillo
+            ;;
+        INFO)
+            color='\033[0;32m' # Verde
+            ;;
+        *)
+            color='\033[0m' # Sin color
+            ;;
+    esac
+    
+    echo -e "${color}[$level] ${message}\033[0m"
+}
+
+proteger() {
+    log_message "INFO" "Protegiendo archivos (modo inmutable)..."
+    for archivo in "${archivos[@]}"; do
+        if [ -f "$archivo" ]; then
+            if chattr +i "$archivo" 2>/dev/null; then
+                log_message "INFO" "  $archivo - protegido"
+            else
+                log_message "ERROR" "  $archivo - falló la protección"
+            fi
+        else
+            log_message "WARN" "  $archivo - no existe"
+        fi
+    done
+}
+
+desproteger() {
+    log_message "INFO" "Desprotegiendo archivos (modo editable)..."
+    for archivo in "${archivos[@]}"; do
+        if [ -f "$archivo" ]; then
+            if chattr -i "$archivo" 2>/dev/null; then
+                log_message "INFO" "  $archivo - desprotegido"
+            else
+                log_message "ERROR" "  $archivo - falló al desproteger"
+            fi
+        else
+            log_message "WARN" "  $archivo - no existe"
+        fi
+    done
+}
+
+ver_estado() {
+    log_message "INFO" "Estado actual de los archivos:"
+    for archivo in "${archivos[@]}"; do
+        if [ -f "$archivo" ]; then
+            if lsattr "$archivo" 2>/dev/null | grep -q "i"; then
+                log_message "INFO" "  $archivo - INMUTABLE"
+            else
+                log_message "WARN" "  $archivo - MUTABLE"
+            fi
+        else
+            log_message "ERROR" "  $archivo - NO EXISTE"
+        fi
+    done
+}
+
+# Verificar root
+[ "$(id -u)" -ne 0 ] && { log_message "ERROR" "Este script debe ejecutarse como root"; exit 1; }
+
+# Menú principal
+case "$1" in
+    "proteger") proteger ;;
+    "desproteger") desproteger ;;
+    "estado") ver_estado ;;
+    *) 
+        log_message "ERROR" "Uso incorrecto"
+        echo "Uso correcto: $0 [proteger|desproteger|estado]"
+        exit 1
+        ;;
+esac

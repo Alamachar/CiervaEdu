@@ -1,0 +1,63 @@
+[
+  {
+    "name": "IT-tools",
+    "url": "https://it-tools.tech",
+    "description": "Colección de herramientas útiles para desarrolladores y administradores de sistemas."
+  },
+  {
+    "name": "Clima",
+    "url": "https://meteo.iesjuandelacierva.com",
+    "description": "Portal meteorológico con datos en tiempo real y pronósticos locales."
+  },
+  {
+    "name": "Gmail",
+    "url": "https://mail.google.com",
+    "description": "Servicio de correo electrónico de Google con almacenamiento en la nube."
+  },
+  {
+    "name": "Moodle",
+    "url": "https://educacionadistancia.juntadeandalucia.es/centros/malaga/my/",
+    "description": "Plataforma de aprendizaje usado en el centro."
+  },
+  {
+    "name": "Proxmox",
+    "url": "https://proxmox.iesjuandelacierva.com:8006",
+    "description": "Panel Proxmox del centro."
+  },
+  {
+    "name": "Drive",
+    "url": "https://drive.google.com/drive/my-drive",
+    "description": "Almacenamiento en la nube de Google Drive para archivos y colaboración."
+  },
+  {
+    "name": "Classroom",
+    "url": "https://classroom.google.com",
+    "description": "Plataforma educativa de Google para gestionar clases y tareas en línea."
+  },
+
+  {
+    "name": "Convertx",
+    "url": "http://localhost:3000",
+    "description": "Herramienta local para conversión de archivos."
+  },
+  {
+    "name": "Stirlingpdf",
+    "url": "http://stirlingpdf.io",
+    "description": "Suite de herramientas PDF en línea para editar, comprimir y convertir documentos."
+  },
+  {
+    "name": "Filebrowser",
+    "url": "http://localhost:2005",
+    "description": "Explorador de archivos local accesible vía web para gestión de archivos."
+  },
+  {
+    "name": "CiervaEdu",
+    "url": "https://ciervaedu.pablomp.es",
+    "description": "Pagina de CiervaEdu."
+  },{
+    "name": "Removebg",
+    "url": "https://www.remove.bg/",
+    "description": "Pagina de para borrar el fondo de tus imagenes."
+  }
+]
+

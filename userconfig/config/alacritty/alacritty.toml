@@ -1,0 +1,49 @@
+[font]
+size = 12  # Tamaño de fuente (ajústalo)
+
+# Usa la variante MONO (la mejor para terminales)
+[font.normal]
+family = "AdwaitaMono Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "AdwaitaMono Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "AdwaitaMono Nerd Font Mono"
+style = "Italic"
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
+[colors.cursor]
+text = "#282a36"
+cursor = "#f8f8f2"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+
+[window]
+dimensions = { columns = 120, lines = 35 }
+padding = { x = 15, y = 15 }
+decorations = "full"
+dynamic_title = true
+startup_mode = "Windowed"
+
+[keyboard]
+bindings = [
+  # — Copiar con Ctrl+Shift+C (igual que GNOME Terminal) —
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+
+  # — Pegar con Ctrl+Shift+V —
+  { key = "V", mods = "Control|Shift", action = "Paste" },
+]
+
+[mouse]
+bindings = [
+  # — Pega el portapapeles CLIPBOARD con clic derecho —
+  { mouse = "Right", mods = "None", action = "Paste" },
+]

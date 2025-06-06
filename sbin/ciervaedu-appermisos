@@ -1,6 +1,31 @@
 #!/bin/bash
-#ciervaedu-appermisos
-# Funcion para mostrar el uso correcto del script
+#ciervaedu-appermisos (versión mejorada con logging)
+
+# Función de logging con niveles y colores
+log_message() {
+    local level=$1
+    local message=$2
+    local color
+    
+    case $level in
+        ERROR)
+            color='\033[0;31m' # Rojo
+            ;;
+        WARN)
+            color='\033[1;33m' # Amarillo
+            ;;
+        INFO)
+            color='\033[0;32m' # Verde
+            ;;
+        *)
+            color='\033[0m' # Sin color
+            ;;
+    esac
+    
+    echo -e "${color} ${message}\033[0m"
+}
+
+# Función para mostrar el uso correcto
 mostrar_uso() {
     echo "Uso: sudo $0 <opcion>"
     echo "Opciones:"
@@ -10,57 +35,192 @@ mostrar_uso() {
     exit 1
 }
 
-# Verificamos que el script se ejecute como root
+# Verificar ejecución como root
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Este script debe ejecutarse como root."
+    log_message ERROR "Este script debe ejecutarse como root."
     exit 1
 fi
 
-# Verificamos que se haya proporcionado una opcion
+# Verificar argumento
 if [ $# -ne 1 ]; then
     mostrar_uso
 fi
 
-# Asignamos la opcion proporcionada a una variable
-opcion=$1
+# Funciones auxiliares
+existe_usuario() {
+    getent passwd "$1" >/dev/null
+}
 
-# Comprobamos la opcion seleccionada y realizamos la acción correspondiente
-case $opcion in
+existe_grupo() {
+    getent group "$1" >/dev/null
+}
+
+existe_comando() {
+    command -v "$1" >/dev/null
+}
+
+# Grupo predefinido
+GRUPO="appusers"
+
+# Crear grupo si no existe
+if ! existe_grupo "$GRUPO"; then
+    log_message WARN "El grupo '$GRUPO' no existe. Creándolo..."
+    if groupadd "$GRUPO"; then
+        log_message INFO "Grupo '$GRUPO' creado exitosamente."
+    else
+        log_message ERROR "Error al crear el grupo '$GRUPO'. Abortando."
+        exit 1
+    fi
+fi
+
+# Procesar opción
+case $1 in
     1)
-	echo "Con el comando which puedes ver la ruta del comando"
-        echo "Ingrese la ruta del comando y el nombre del usuario:"
+        log_message INFO "=== CAMBIAR PERMISOS DE COMANDO Y ASIGNAR GRUPO ==="
+        log_message INFO "=== Para saber el comando usa which <comando> ==="
+        # Obtener comando
         read -p "Nombre del comando: " comando
+        if [ -z "$comando" ]; then
+            log_message ERROR "Debe especificar un comando."
+            exit 1
+        fi
+        
+        # Buscar comando
+        ruta_comando=$(which "$comando" 2>/dev/null)
+        if [ -z "$ruta_comando" ]; then
+            log_message ERROR "El comando '$comando' no existe en el PATH."
+            exit 1
+        fi
+        
+        # Obtener usuario
         read -p "Nombre del usuario: " usuario
-        grupo="appusers"
+        if [ -z "$usuario" ]; then
+            log_message ERROR "Debe especificar un usuario."
+            exit 1
+        fi
         
-        # Cambiamos los permisos del comando a 750 y lo asignamos al grupo "appusers"
-        chmod 750 "$comando"
-        chgrp "$grupo" "$comando"
+        # Verificar usuario
+        if ! existe_usuario "$usuario"; then
+            log_message ERROR "El usuario '$usuario' no existe."
+            exit 1
+        fi
         
-        # Añadimos al usuario al grupo "appusers"
-        usermod -aG "$grupo" "$usuario"
-        echo "El usuario $usuario fue añadido al grupo $grupo."
+        log_message INFO "\nResumen de operaciones:"
+        log_message INFO "Comando:    $ruta_comando"
+        log_message INFO "Usuario:    $usuario"
+        log_message INFO "Grupo:      $GRUPO"
+        log_message INFO "Permisos:   750"
+        log_message INFO "\nSe realizarán los siguientes cambios:"
+        log_message INFO "1. Cambiar grupo propietario a '$GRUPO'"
+        log_message INFO "2. Establecer permisos 750"
+        log_message INFO "3. Agregar usuario '$usuario' al grupo '$GRUPO'"
         
-        echo "Se han cambiado los permisos del comando $comando a 750 y se ha asignado al grupo $grupo."
+        read -p "¿Continuar? (s/n): " confirmar
+        if [ "$confirmar" != "s" ] && [ "$confirmar" != "S" ]; then
+            log_message INFO "Operación cancelada."
+            exit 0
+        fi
+        
+        # Cambiar grupo y permisos
+        if chgrp "$GRUPO" "$ruta_comando" && chmod 750 "$ruta_comando"; then
+            log_message INFO "Permisos actualizados correctamente."
+            log_message INFO "Ahora solo los usuarios del grupo pueden acceder a ese programa."
+        else
+            log_message ERROR "Error al actualizar permisos."
+            exit 1
+        fi
+        
+        # Agregar usuario al grupo
+        if usermod -aG "$GRUPO" "$usuario"; then
+            log_message INFO "Usuario '$usuario' agregado al grupo '$GRUPO'."
+        else
+            log_message ERROR "Error al agregar usuario al grupo."
+            exit 1
+        fi
         ;;
+        
     2)
-        echo "Ingrese el nombre del usuario que desea agregar al grupo appusers:"
+        log_message INFO "=== AGREGAR USUARIO AL GRUPO ==="
         read -p "Nombre del usuario: " usuario
-        grupo="appusers"
         
-        # Añadimos al usuario al grupo "appusers"
-        usermod -aG "$grupo" "$usuario"
-        echo "El usuario $usuario fue añadido al grupo $grupo."
-        ;;
-    3)
-        echo "Ingrese el nombre del usuario que desea quitar del grupo appusers:"
-        read -p "Nombre del usuario: " usuario
-        grupo="appusers"
+        if [ -z "$usuario" ]; then
+            log_message ERROR "Debe especificar un usuario."
+            exit 1
+        fi
         
-        # Quitamos al usuario del grupo "appusers"
-        gpasswd -d "$usuario" "$grupo"
-        echo "El usuario $usuario fue quitado del grupo $grupo."
+        if ! existe_usuario "$usuario"; then
+            log_message ERROR "El usuario '$usuario' no existe."
+            exit 1
+        fi
+        
+        # Verificar si ya es miembro
+        if id -nG "$usuario" | grep -qw "$GRUPO"; then
+            log_message WARN "El usuario '$usuario' ya es miembro del grupo '$GRUPO'."
+            exit 0
+        fi
+        
+        read -p "¿Agregar usuario '$usuario' al grupo '$GRUPO'? (s/n): " confirmar
+        if [ "$confirmar" != "s" ] && [ "$confirmar" != "S" ]; then
+            log_message INFO "Operación cancelada."
+            exit 0
+        fi
+        
+        if usermod -aG "$GRUPO" "$usuario"; then
+            log_message INFO "Usuario '$usuario' agregado exitosamente al grupo '$GRUPO'."
+        else
+            log_message ERROR "Error al agregar usuario al grupo."
+            exit 1
+        fi
         ;;
+        
+        3)
+        log_message INFO "=== QUITAR USUARIO DEL GRUPO ==="
+        
+        # Mostrar usuarios actuales en el grupo
+        miembros=$(getent group "$GRUPO" | cut -d: -f4)
+        if [ -z "$miembros" ]; then
+            log_message WARN "El grupo '$GRUPO' no tiene usuarios."
+        else
+            log_message INFO "Usuarios actuales en el grupo '$GRUPO':"
+            IFS=',' read -ra usuarios_array <<< "$miembros"
+            for usuario_actual in "${usuarios_array[@]}"; do
+                log_message INFO "   - $usuario_actual"
+            done
+            echo ""
+        fi
+        
+        read -p "Nombre del usuario a quitar: " usuario
+        
+        if [ -z "$usuario" ]; then
+            log_message ERROR "Debe especificar un usuario."
+            exit 1
+        fi
+        
+        if ! existe_usuario "$usuario"; then
+            log_message ERROR "El usuario '$usuario' no existe."
+            exit 1
+        fi
+        
+        # Verificar si es miembro
+        if ! id -nG "$usuario" | grep -qw "$GRUPO"; then
+            log_message WARN "El usuario '$usuario' no es miembro del grupo '$GRUPO'."
+            exit 0
+        fi
+        
+        read -p "¿Quitar usuario '$usuario' del grupo '$GRUPO'? (s/n): " confirmar
+        if [ "$confirmar" != "s" ] && [ "$confirmar" != "S" ]; then
+            log_message INFO "Operación cancelada."
+            exit 0
+        fi
+        
+        if gpasswd -d "$usuario" "$GRUPO"; then
+            log_message INFO "Usuario '$usuario' quitado exitosamente del grupo '$GRUPO'."
+        else
+            log_message ERROR "Error al quitar usuario del grupo."
+            exit 1
+        fi
+        ;;
+        
     *)
         mostrar_uso
         ;;

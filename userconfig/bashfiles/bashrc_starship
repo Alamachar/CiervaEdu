@@ -1,0 +1,51 @@
+# Configuración de historial
+HISTCONTROL=ignoreboth
+shopt -s histappend
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Prompt moderno con Starship
+eval "$(starship init bash)"
+
+# Configuración de ventana
+shopt -s checkwinsize
+
+# Mejorar experiencia con less
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Configuración específica de Debian
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Soporte para colores
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Aliases personales
+alias ls='lsd'
+alias ll='lsd -lah'
+alias cat='batcat'
+alias cp='cp -r'
+alias rm='rm -r'
+
+# Carga de aliases y completados adicionales
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Mensaje de bienvenida
+figlet CiervaEdu | lolcat

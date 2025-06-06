@@ -1,0 +1,61 @@
+:root {
+    --linux-primary: #007bff;
+    --linux-secondary: #0056b3;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f8f9fa;
+}
+
+.form-signin {
+    max-width: 400px;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.login-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.btn-linux {
+    background: var(--linux-primary);
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-linux:hover {
+    background: var(--linux-secondary);
+    transform: translateY(-2px);
+}
+
+.error-message {
+    background-color: #ffeef0;
+    border-left: 4px solid #dc3545;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.copyright {
+    color: #6c757d;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}

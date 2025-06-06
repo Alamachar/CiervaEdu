@@ -1,0 +1,178 @@
+      :root {
+        --background-color: #fff;
+        --text-color-primary: #202124;
+        --text-color-secondary: #5f6368;
+        --card-background: #fff;
+        --border-color: #dfe1e5;
+        --shadow-color: rgba(0, 0, 0, 0.05);
+        --clock-color: #5f6368;
+        --link-color: #1a0dab;
+        --url-color: #006621;
+      }
+
+      [data-theme="dark"] {
+        --background-color: #202124;
+        --text-color-primary: #e8eaed;
+        --text-color-secondary: #9aa0a6;
+        --card-background: #303134;
+        --border-color: #5f6368;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --clock-color: #9aa0a6;
+        --link-color: #8ab4f8;
+        --url-color: #81c995;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        background-color: var(--background-color);
+        color: var(--text-color-primary);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      #clock {
+        font-size: 90px;
+        color: var(--clock-color);
+      }
+
+      .center-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10vh;
+        text-align: center;
+        padding-left: 5vw;
+        padding-right: 5vw;
+      }
+
+      #searchBar {
+        width: 600px;
+        max-width: 100%;
+        padding: 14px 28px;
+        font-size: 16px;
+        background-color: var(--card-background);
+        color: var(--text-color-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        margin: 10px 0;
+        outline: none;
+        box-shadow: 0 2px 5px var(--shadow-color);
+        transition: all 0.3s;
+      }
+
+      #searchBar:focus {
+        border-color: var(--link-color);
+        box-shadow: 0 0 10px var(--shadow-color);
+      }
+
+      #greeting {
+        color: var(--text-color-secondary);
+        font-size: 1.2em;
+        margin: 15px 0;
+      }
+
+      .webmarks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 30px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .webmark-card {
+        background: var(--card-background);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        transition: all 0.2s ease-in-out;
+        height: 100%;
+      }
+
+      .webmark-card:hover {
+        box-shadow: 0 4px 12px var(--shadow-color);
+        transform: translateY(-4px);
+      }
+
+      .webmark-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding: 20px;
+        height: 100%;
+      }
+
+      .webmark-title {
+        color: var(--link-color);
+        font-size: 16px;
+        margin-bottom: 8px;
+        transition: color 0.3s;
+        font-weight: bold;
+      }
+
+      .webmark-description {
+        color: var(--text-color-secondary);
+        font-size: 14px;
+      }
+
+      .webmark-favicon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        object-fit: contain;
+      }
+
+      .webmark-header {
+        display: flex;
+        /* align-items: center; */
+        margin-bottom: 10px;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        background-color: var(--card-background);
+        color: var(--text-color-primary);
+        box-shadow: 0 2px 5px var(--shadow-color);
+      }
+
+      @media (max-width: 600px) {
+        #clock {
+          font-size: 12vw;
+        }
+
+        #searchBar {
+          width: 100%;
+        }
+
+        #greeting {
+          font-size: 1em;
+        }
+
+        .theme-toggle {
+          padding: 8px;
+          top: 15px;
+          right: 15px;
+        }
+      }
+
+
+
+      .theme-toggle:hover {
+        transform: rotate(25deg);
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .theme-toggle img {
+        display: block;
+        object-fit: cover;
+      }
